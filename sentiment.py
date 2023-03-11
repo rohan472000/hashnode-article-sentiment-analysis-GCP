@@ -7,13 +7,11 @@ from textblob import TextBlob
 from google.oauth2.credentials import Credentials
 
 # Set up Google Cloud credentials
-# credentials = service_account.Credentials.from_service_account_file(os.environ['GOOGLE_APPLICATION_CREDENTIALS'])
-credentials = service_account.Credentials.from_service_account_file('/home/anand4rohan/earthquake/service.json')
-# credentials = Credentials.from_authorized_user_info(info=None)
+credentials = service_account.Credentials.from_service_account_file('service.json')
+
 
 # Set up BigQuery client
-# client = bigquery.Client(credentials=credentials, project=credentials.project_id)
-client = bigquery.Client(credentials=credentials, project='clean-phoenix-378215')
+client = bigquery.Client(credentials=credentials, project='clone-pho-076231')
 
 # Set up Hashnode API endpoint
 hashnode_api_endpoint = "https://api.hashnode.com"
@@ -41,14 +39,9 @@ def extract_articles():
     # Set up Hashnode API headers
     headers = {
         "Content-Type": "application/json",
-        "Authorization": "d8de40ab-687d-4365-810b-02392dabc5cc"
+        "Authorization": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"   # your api-key
     }
-    # # Send query to Hashnode API
-    # response = requests.post(hashnode_api_endpoint, headers=headers, json={'query': query})
-    # print('response: ',response.content)
-    # # Extract articles from response
-    # articles = response.json()['data']['user']['publication']['posts']
-    # return articles
+
     response = requests.post(hashnode_api_endpoint, headers=headers, json={'query': query})
     if response.status_code == 200:
         articles = response.json()['data']['user']['publication']['posts']
@@ -85,10 +78,7 @@ def insert_data(analyzed_articles):
         bigquery.SchemaField("keywords", "STRING", mode="REPEATED"),
         bigquery.SchemaField("sentiment", "FLOAT", mode="REQUIRED")
     ]
-    # Create BigQuery table
-    # table_id = f"{credentials.project_id}.your_dataset.your_table"
-    # table = bigquery.Table(table_id, schema=schema)
-    # table = client.create_table(table)
+   
     # Create BigQuery table
     table = bigquery.Table(table_ref, schema=schema)
     table.time_partitioning = bigquery.TimePartitioning(field="date")
