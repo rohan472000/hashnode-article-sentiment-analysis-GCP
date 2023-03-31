@@ -1,10 +1,10 @@
 import requests
-import json
-import os
+# import json
+# import os
 from google.cloud import bigquery
 from google.oauth2 import service_account
 from textblob import TextBlob
-from google.oauth2.credentials import Credentials
+# from google.oauth2.credentials import Credentials
 
 # Set up Google Cloud credentials
 credentials = service_account.Credentials.from_service_account_file('service.json')
@@ -42,7 +42,8 @@ def extract_articles():
         "Authorization": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"   # your api-key
     }
 
-    response = requests.post(hashnode_api_endpoint, headers=headers, json={'query': query})
+    response = requests.post(hashnode_api_endpoint, 
+                             headers=headers, json={'query': query})
     if response.status_code == 200:
         articles = response.json()['data']['user']['publication']['posts']
         return articles
@@ -88,7 +89,8 @@ def insert_data(analyzed_articles):
     rows_to_insert = []
     for article in analyzed_articles:
         rows_to_insert.append(
-            (article['_id'], article['title'], article['dateAdded'], article['keywords'], article['sentiment']))
+            (article['_id'], article['title'], article['dateAdded'], 
+             article['keywords'], article['sentiment']))
     errors = client.insert_rows(table, rows_to_insert)
     if errors:
         print(f"Errors inserting rows into BigQuery: {errors}")
