@@ -41,9 +41,9 @@ def extract_articles():
         "Authorization": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"   # your api-key
     }
 
-    response = requests.post(hashnode_api_endpoint, 
+    response = requests.post(hashnode_api_endpoint,
                              headers=headers, json={'query': query})
-    if response.status_code == 200:
+    if response.status_code == requests.codes.ok:
         articles = response.json()['data']['user']['publication']['posts']
         return articles
     else:
