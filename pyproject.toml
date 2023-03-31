@@ -8,14 +8,13 @@ install_requires = [
 
 [tool.ruff]
 select = [
-  "# COM",  # flake8-commas
-  "# DJ",  # flake8-django
-  "# ERA",  # eradicate
-  "# NPY",  # NumPy-specific rules
-  "# PD",  # pandas-vet
-  "# PLR091",  # Pylint Refactor just for max-args, max-branches, etc.
-  "# Q",  # flake8-quotes
-  "# T20",  # flake8-print
+  #  "COM",  # flake8-commas
+  # "DJ",    # flake8-django
+  # "ERA",   # eradicate
+  # "NPY",   # NumPy-specific rules
+  # "PD",    # pandas-vet
+  # "Q",     # flake8-quotes
+  # "T20",   # flake8-print
   "A",    # flake8-builtins
   "ANN",  # flake8-annotations
   "ARG",  # flake8-unused-arguments
