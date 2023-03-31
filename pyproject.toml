@@ -8,21 +8,22 @@ install_requires = [
 
 [tool.ruff]
 select = [
-  #  "COM",  # flake8-commas
+  # "ANN",   # flake8-annotations
+  # "COM",   # flake8-commas
+  # "D",     # pydocstyle
   # "DJ",    # flake8-django
   # "ERA",   # eradicate
   # "NPY",   # NumPy-specific rules
   # "PD",    # pandas-vet
   # "Q",     # flake8-quotes
   # "T20",   # flake8-print
+  # "TRY",   # tryceratops
   "A",    # flake8-builtins
-  "ANN",  # flake8-annotations
   "ARG",  # flake8-unused-arguments
   "B",    # flake8-bugbear
   "BLE",  # flake8-blind-except
   "C4",   # flake8-comprehensions
   "C90",  # McCabe cyclomatic complexity
-  "D",    # pydocstyle
   "DTZ",  # flake8-datetimez
   "E",    # pycodestyle
   "EM",   # flake8-errmsg
@@ -51,7 +52,6 @@ select = [
   "T10",  # flake8-debugger
   "TCH",  # flake8-type-checking
   "TID",  # flake8-tidy-imports
-  "TRY",  # tryceratops
   "UP",   # pyupgrade
   "W",    # pycodestyle
   "YTT",  # flake8-2020
