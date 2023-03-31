@@ -1,10 +1,9 @@
 import requests
-# import json
-# import os
+
 from google.cloud import bigquery
 from google.oauth2 import service_account
 from textblob import TextBlob
-# from google.oauth2.credentials import Credentials
+
 
 # Set up Google Cloud credentials
 credentials = service_account.Credentials.from_service_account_file('service.json')
