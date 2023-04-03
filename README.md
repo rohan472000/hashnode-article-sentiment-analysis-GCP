@@ -1,3 +1,5 @@
+###  For this repo, Copyright (c) 2023 Rohan Anand (anand00rohan@gmail.com), rohan472000 on GitHub
+
 # hashnode-article-sentiment-analysis-GCP
 Fetching articles from a Hashnode account and analyzing the sentiment of article through article's name.
 
