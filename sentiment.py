@@ -1,9 +1,7 @@
 import requests
-
 from google.cloud import bigquery
 from google.oauth2 import service_account
 from textblob import TextBlob
-
 
 # Set up Google Cloud credentials
 credentials = service_account.Credentials.from_service_account_file('service.json')
@@ -41,13 +39,14 @@ def extract_articles():
         "Authorization": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"   # your api-key
     }
 
-    response = requests.post(hashnode_api_endpoint, 
-                             headers=headers, json={'query': query})
-    if response.status_code == 200:
+    response = requests.post(hashnode_api_endpoint,
+                             headers=headers, json={'query': query},
+                             timeout=10)
+    if response.status_code == requests.codes.ok:
         articles = response.json()['data']['user']['publication']['posts']
         return articles
-    else:
-        raise ValueError(f"Failed to retrieve articles: {response.content}")
+    msg = f"Failed to retrieve articles: {response.content}"
+    raise ValueError(msg)
 
 
 # Define function to analyze articles using NLP
@@ -78,7 +77,7 @@ def insert_data(analyzed_articles):
         bigquery.SchemaField("keywords", "STRING", mode="REPEATED"),
         bigquery.SchemaField("sentiment", "FLOAT", mode="REQUIRED")
     ]
-   
+
     # Create BigQuery table
     table = bigquery.Table(table_ref, schema=schema)
     table.time_partitioning = bigquery.TimePartitioning(field="date")
@@ -88,7 +87,7 @@ def insert_data(analyzed_articles):
     rows_to_insert = []
     for article in analyzed_articles:
         rows_to_insert.append(
-            (article['_id'], article['title'], article['dateAdded'], 
+            (article['_id'], article['title'], article['dateAdded'],
              article['keywords'], article['sentiment']))
     errors = client.insert_rows(table, rows_to_insert)
     if errors:
