@@ -53,7 +53,7 @@ def extract_articles():
     response = requests.post(HASHNODE_API_ENDPOINT,
                              headers=headers, json={'query': query},
                              timeout=10)
-    if response.status_code == requests.codes.ok:
+    if response.status_code == 200:
         articles = response.json()['data']['user']['publication']['posts']
         return articles
     msg = f"Failed to retrieve articles: {response.content}"
@@ -111,6 +111,7 @@ def insert_data(analyzed_articles):
 
 # Define main function
 def main():
+    ''' main function'''
     articles = extract_articles()
     analyzed_articles = analyze_articles(articles)
     insert_data(analyzed_articles)
