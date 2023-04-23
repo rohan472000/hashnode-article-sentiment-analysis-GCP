@@ -1,1 +1,7 @@
 pylint
+requests
+google-cloud-bigquery
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+textblob
