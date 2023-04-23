@@ -1,6 +1,7 @@
 """
-This module extracts articles from the Hashnode API, performs natural language processing (NLP)
-analysis on the article titles, and inserts the data into a BigQuery table.
+This module extracts articles from the Hashnode API, performs natural 
+language processing (NLP) analysis on the article titles, and inserts
+the data into a BigQuery table.
 
 The following functions are defined in this module:
 - extract_articles: extracts articles from the Hashnode API.
@@ -49,7 +50,7 @@ def extract_articles():
         "Authorization": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"   # your api-key
     }
 
-    response = requests.post(hashnode_api_endpoint,
+    response = requests.post(HASHNODE_API_ENDPOINT,
                              headers=headers, json={'query': query},
                              timeout=10)
     if response.status_code == requests.codes.ok:
