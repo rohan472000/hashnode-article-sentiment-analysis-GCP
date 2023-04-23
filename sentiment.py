@@ -1,3 +1,14 @@
+"""
+This module extracts articles from the Hashnode API, performs natural language processing (NLP)
+analysis on the article titles, and inserts the data into a BigQuery table.
+
+The following functions are defined in this module:
+- extract_articles: extracts articles from the Hashnode API.
+- analyze_articles: performs NLP analysis on the article titles.
+- insert_data: inserts the analyzed data into a BigQuery table.
+- main: orchestrates the execution of the above functions.
+"""
+
 import requests
 from google.cloud import bigquery
 from google.oauth2 import service_account
@@ -11,13 +22,12 @@ credentials = service_account.Credentials.from_service_account_file('service.jso
 client = bigquery.Client(credentials=credentials, project='clone-pho-076231')
 
 # Set up Hashnode API endpoint
-hashnode_api_endpoint = "https://api.hashnode.com"
+HASHNODE_API_ENDPOINT = "https://api.hashnode.com"
 
 
 # Define function to extract articles from Hashnode API
 def extract_articles():
-    # Set up Hashnode API endpoint
-    hashnode_api_endpoint = "https://api.hashnode.com"
+    """Extract articles from Hashnode API."""
     # Define Hashnode API query
     query = '''
         query {
@@ -51,6 +61,7 @@ def extract_articles():
 
 # Define function to analyze articles using NLP
 def analyze_articles(articles):
+    """Analyze articles using NLP."""
     analyzed_articles = []
     for article in articles:
         # Extract keywords from article content
@@ -68,6 +79,7 @@ def analyze_articles(articles):
 
 # Define function to insert data into BigQuery
 def insert_data(analyzed_articles):
+    """Insert data into BigQuery."""
     # Define BigQuery table schema
     table_ref = client.dataset('earthquake').table('tableme')
     schema = [
