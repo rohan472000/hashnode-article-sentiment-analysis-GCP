@@ -109,14 +109,11 @@ def insert_data(analyzed_articles):
         print(f"Rows inserted into BigQuery: {len(rows_to_insert)}")
 
 
-# Define main function
 def main():
-    ''' main function'''
     articles = extract_articles()
     analyzed_articles = analyze_articles(articles)
     insert_data(analyzed_articles)
 
 
-# Run main function
 if __name__ == "__main__":
     main()
