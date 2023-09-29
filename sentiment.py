@@ -54,8 +54,8 @@ def extract_articles():
                              headers=headers, json={'query': query},
                              timeout=10)
     if response.status_code == "200":
-        articles = response.json()['data']['user']['publication']['posts']
-        return articles
+        return response.json()['data']['user']['publication']['posts']
+ 
     msg = f"Failed to retrieve articles: {response.content}"
     raise ValueError(msg)
 
