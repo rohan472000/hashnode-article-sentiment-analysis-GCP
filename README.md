@@ -1,7 +1,7 @@
 ###  For this repo, Copyright (c) 2023 Rohan Anand (anand00rohan@gmail.com), rohan472000 on GitHub
 
 # hashnode-article-sentiment-analysis-GCP
-Fetching articles from a Hashnode account and analyzing the sentiment of article through article's name.
+Fetching articles from a **Hashnode** account and analyzing the sentiment of article through article's name.
 
 It will rate sentiment on a scale of `-1` to `1` means `-1` is very **negative**, `0` is **neutral**, `1` is very **positive**.
 
